@@ -1,0 +1,3 @@
+[submodule "binacpp"]
+	path = binacpp
+	url = https://github.com/tensaix2j/binacpp
