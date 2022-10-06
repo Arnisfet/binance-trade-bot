@@ -34,15 +34,12 @@ libbinacpp_include=${libbinacpp_dir}/include
 libbinacpp_lib=${libbinacpp_dir}/lib
 
 # Main rules
-all: submodules copy $(BUILDDIR) $(NAME) shell
+all: submodules $(BUILDDIR) $(NAME) shell
 
 # Clone the submodule from binance repository
 submodules:
 	git submodule init
 	git submodule update
-# Copy src
-copy:
-	cp ./binacpp/example/run.template.sh ./src
 	cp ./binacpp/example/cacert.pem ./src
 
 # Object dir rule
@@ -64,11 +61,12 @@ $(NAME): $(BUILDOBJS)
 # Rule for start shell-binance script
 
 shell:
-		cat ${DIR}run.template.sh  | sed s/%executable%/$@/ > ${NAME}.run.sh
-		chmod 755 ${NAME}.run.sh
+	cat ./another/run.template.sh  | sed s/%executable%/${NAME}/ > ${NAME}.run.sh
+	chmod 755 ${NAME}.run.sh
 
 clean:
 	rm -rf $(BUILDDIR)
+	rm -rf $(NAME).run.sh
 
 fclean: clean
 	rm -rf ${NAME}

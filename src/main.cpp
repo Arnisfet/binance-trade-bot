@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <iostream>
 
 
 #include "binacpp.h"
@@ -13,5 +14,7 @@
 
 int main ()
 {
-
+//	string api_key 		= API_KEY;
+//	string secret_key = SECRET_KEY;
+//	BinaCPP::init( api_key , secret_key );
 }
