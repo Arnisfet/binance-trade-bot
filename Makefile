@@ -54,7 +54,7 @@ $(BUILDDIR)%.o:$(DIR)%.cpp
 # Create project file
 $(NAME): $(BUILDOBJS)
 	$(CC) -L$(libcurl_lib) -L$(libwebsockets_lib) -L$(libbinacpp_lib) $(BUILDOBJS) \
-	-Wl,-rpath,$(libbinacpp_lib) -Wl,-rpath,$(libwebsockets_lib)/ -Wl,-rpath,$(libcurl_lib)  \
+	-Wl,-rpath,$(libbinacpp_lib) -Wl,-rpath,$(libcurl_lib)  \
 	-lcurl -lcrypto -lwebsockets -lbinacpp  -g -o $(NAME)
 
 # Rule for start shell-binance script
