@@ -6,7 +6,7 @@ DIR			= ./src/
 SRCNAMES	= $(shell ls $(DIR) | grep -E ".+\.cpp")
 SRC 		= $(addprefix $(DIR), $(SRCNAMES))
 OBJ			= $(SRC:.cpp=.o)
-INC 		= ./src/
+INC 		= includes
 BUILDDIR 	= ./build/
 BUILDOBJS 	= $(addprefix $(BUILDDIR), $(SRCNAMES:.cpp=.o))
 # Some flags
@@ -40,7 +40,6 @@ all: submodules $(BUILDDIR) $(NAME) shell
 submodules:
 	git submodule init
 	git submodule update
-	cp ./binacpp/example/cacert.pem ./src
 
 # Object dir rule
 $(BUILDDIR):
@@ -48,7 +47,7 @@ $(BUILDDIR):
 
 # Object dir rule
 $(BUILDDIR)%.o:$(DIR)%.cpp
-	$(CC) -I$(libcurl_include) -I$(jsoncpp_include) \
+	$(CC) -I$(libcurl_include) -I$(jsoncpp_include) -I$(INC) \
 	-I$(libwebsockets_include) -I$(libbinacpp_include) \
 	-g -o $@ -c $<
 
