@@ -46,12 +46,11 @@ std::string Remove_Space(std::string line)
 	return (line);
 }
 
-void Split_Tokens(std::string keys)
+void Split_Tokens(std::string keys, t_keys *pointer)
 {
 	std::string::size_type begin = 0;
 	std::string::size_type end;
 	std::string substr;
-	t_keys pointer;
 	int i = 0;
 
 	begin = i;
@@ -60,19 +59,32 @@ void Split_Tokens(std::string keys)
 		if (keys[i] == ' ')
 		{
 			substr = keys.substr(begin, i - begin);
-			pointer.config.push_back(substr);
+			pointer->config.push_back(substr);
 			begin = i + 1;
 		}
 		i++;
 	}
 }
 
+void MakeConstruction(t_keys *pointer)
+{
+	auto begin = pointer->config.begin();
+	auto end = pointer->config.end();
+	for (; begin != end; begin++)
+	{
+		if (*begin == "api-key:")
+			pointer->api_key = *(begin + 1);
+		else if (*begin == "secret-key:")
+			pointer->secret_key = *(begin + 1);
+	}
+}
 
 int main ()
 {
 
 	std::string file_key;
 	std::string keys;
+	t_keys pointer;
 
 	std::ifstream read("another/api_key");
 	if (!read)
@@ -84,8 +96,7 @@ int main ()
 		keys = keys + file_key + "\n";
 	read.close();
 	keys = Remove_Space(keys);
-	Split_Tokens(keys);
-//	string api_key 		= API_KEY;
-//	string secret_key = SECRET_KEY;
-//	BinaCPP::init( api_key , secret_key );
+	Split_Tokens(keys, &pointer);
+	MakeConstruction(&pointer);
+	BinaCPP::init( pointer.api_key, pointer.secret_key );
 }
