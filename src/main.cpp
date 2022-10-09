@@ -99,5 +99,4 @@ int main ()
 	Split_Tokens(keys, &pointer);
 	MakeConstruction(&pointer);
 	BinaCPP::init( pointer.api_key, pointer.secret_key );
-	std::cout << "[yu";
 }
