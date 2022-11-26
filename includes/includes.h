@@ -18,6 +18,8 @@ typedef struct s_struct
 {
 	std::string api_key;
 	std::string secret_key;
+    std::string tapi_key;
+    std::string tsecret_key;
 	std::vector<std::string> config;
 } t_keys;
 
